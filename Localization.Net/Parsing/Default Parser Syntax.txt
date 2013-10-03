@@ -1,0 +1,121 @@
+====================================================
+Umbraco.Framework.Localization DefaultParser syntax
+====================================================
+
+-------
+GRAMMAR
+-------
+
+Expression      = { ExpressionPart }
+ExpressionPart  = Text | ParameterSpec | Switch | FormatGroup
+
+ParameterSpec   = '{' PName , [ ':' , PFormat ] '}'
+PName           = string (trimmed)
+PFormat         = string (trimmed)
+
+Switch          = '#' , SwitchParameter , '{' , Case { '|' , Case } , [ '|', '?', NullCase ] , '}'
+SwitchParameter = PName , [ ':', PFormat ]
+                | CaseTemplateName , '(' , PName , [ ':', PFormat ] , ')'
+CaseTemplateName= PName
+
+Case            = [ Condition , ':' ] , TrimdExpression
+NullCase        = Expression
+
+TrimExpression  = Expression (* leading spaces are trimmed if first ExpressionPart is Text, the same for trailing space if last ExpressionPart is Text *)
+                | '"' , Expression , '"' (* Whitespace within quotes is preserved and quotes are removed *)
+
+FormatGroup     = '<' , PName , ':' , TrimExpression , '>'
+
+
+string          = Backslash escaped stopper or non-stopper. 
+                  Depending on context some stoppers do not need to be escaped.
+                  To be sure always escape ''' , '{' , '}' , '|' , '#' , '<' , '>' , ':'. It is not an error to escape non escape characters
+
+---------------
+Parameter names
+---------------
+
+Simple lookup:        The name does not contain dots and the value is taken directly from the passed parameters
+
+Reflection lookup:    The name is split at dots. The first part is taken from the passed parameters. The rest are assumed to be properties or fields of the parameter value
+
+Pattern lookup:       The name is the key to look up prefixed with '@'. 
+                      Parameters may be provided as in @Another(Param1, Param2, ... ParamN) optionally with default format @Another(Param1:N2, Param2:N2, ...). 
+                      Parameters are optional so "@Another" will get the text with the key Another without parameters
+                      Appart from their actual names parameters are also passed as numbers ("0", "1", ...). In that way texts can be used as generic templates
+                      Parameter values are taken as references to the provided parameters unless they are quoted. In that case the string literals are used
+                      If the key is prefixed with two '@'s the value of the corresponding passed parameter is used as key instead, e.g. {@@Param} will look up the pattern "Test" if the value of Param is "Test"
+                      Optionally a postfix can be added to the look up key by adding a +, e.g. {@@Param+Long} will look up the pattern "TestLong" if Param is "Test"
+                      To get a key from another namespace prefix key mus be prefixed with the namespace's name and two underscores ('_'). @Namespace__Key(Param)                                  
+                      
+               
+-----------------
+Parameter formats
+-----------------
+
+roman:                The parameter value is assmued to be integer, and it is formatted as a roman number
+lc/lowercase:         The parameter value is written in lowercase
+uc/uppercase:         The parameter value is written in UPPERCASE
+ca/capitalize-all:    The parameter value is written With All Words Capitalized
+cf/capitalize-first:  The parameter value is written With the first letter capitalized
+All other cases:      The format is passed to string.Format
+
+
+-----------------
+Switch conditions
+-----------------
+
+Case conditions are evaluated in the order they appear in the pattern. However, cases without conditions are evaluated last
+The special parameter {#} means "The value of the parameter evaluated for the switch"
+
+No condition:         All values will pass if not null. #Param{Value} prints "Value" if Param is non null
+Single value:         The value must equal that condtion. #Param{1: Value} prints "Value" if Param is 1
+List:                 Same as single value but with different values seperated by ',': #Param(2,3,5,7: Low Prime}
+                      The criteria may optionally start with "=". If it starts with "!=" the condition matches a value that is not contained in the list
+Interval:             Two syntaxes are provided: 
+                        [LowerLimit, UpperLimit], ]LowerLimit, UpperLimit] (If the bracket points away it means "the value exclusive" otherwise "inclusive"
+                        < Limit, <= Limit, > Limit, >= Limit.
+                        Example: #Param{<5: Less than five | <= At most 10 | ]10, 91]: Bla | > 91: Yada}
+Timespan interval:    The same as interval, but with tiemspans instead of numbers. Timespans are formatted according to ISO 8601 (e.g. P0DT1H0M0S)
+Arithmetic expression:A simple arithmetic operation with the value of the form (Operator RightHandSide)+ Comparer TargetValue.
+                        Examples: % 10 = 1 (true if the number % 10 == 1)
+                                  + 1 * 2 > 4 (true if (number + 1) * 2 > 4)
+Boolean expression:   Any of the above combined with " and " or "or". Parentheses are supported.
+                      Example: #Param{1,2 or ( > 10 and <= 42): W00t!}                  
+
+Lookup expression:    If a condition is prefixed with @ it is looked up in the manager (Use the "Text" dialect for these patterns). This allows reuse of common plural conditions (e.g. Russian http://www.gnu.org/software/hello/manual/gettext/Plural-forms.html)
+                      The same rules are used as "Pattern lookup" for parameter names.
+                      Shorthand notation:
+                      Instead of writing #Count{@Plural1: 1 | @Plural2: less than twenty | @Plural3: a lot}, this notation can be used
+                      #Plural(Count){1 | less than twenty | a lot}
+                                                                 
+
+   ------------
+   Enumerations
+   ------------
+   
+   If the parameter for the switch is of IEnumerable (not string) the value evaluated against conditions has a special meaning.
+   Positive numbers a index from start and negative numbers are index from end (-1 means last)
+   In that way it's possible to represent enumerations as "First, Second, Third and Last" as #EnumParam{0: {#}|, {#}|-1:" and {#}"}.
+   As this is a common case, conditions can be omitted if there are two or three cases all without conditions: 
+      #EnumParam{ {#} | , {#} | " and {#}" } has the same meaning as above.
+      #EnumParam{ {#} | , {#} } means #EnumParam{0: {#} | , {#}}
+
+   The special parameter {#} here means "The value of the enumeration"
+   The special parameter {#Index} means "The index of the enumeration"
+
+-------------
+Format groups
+-------------                  
+Instead of having specific markup in the patterns format groups can be used.
+"Hello <b style='text-transform: uppercase'>{Username}<img src='...'/></b>" is very hard to maintain
+
+The format group provides the construct <PName: TrimExpression>.
+PName is the name of a passed parameter that must be a string where {#} marks the place to insert Expression
+   The above example would be written as 
+   "Hello <FormatParameter: {UserName}" where the parameter "FormatParameter" would have the value  "<b style='text-transform: uppercase'>{#}<img src='...'/></b>"
+
+This makes it possible to seperate translations from markup and apply code logic to the markup without splitting the translation
+   Simple example: Your balance is <BalanceFormat: {Balance:N2}>. The parameter "<span style='color:" + (balance < 0 ? "red" : "green") + "'>{#}</span>"
+
+If the trimmed value of a format group's expression is empty it is omitted from the output. In the above example "<span ..." wouldn't be printed if the parameter "Balance" was null or omitted

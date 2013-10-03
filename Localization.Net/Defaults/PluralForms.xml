@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Localizations PatternDialect="Text">
+  <!--TODO: Plural forms (http://translate.sourceforge.net/wiki/l10n/pluralforms)-->
+
+  <Text Key="Plural1">
+    <Translation Language="en-US">1</Translation>
+    <Translation Language="ru-RU"><![CDATA[%10=1 and %100!=11]]></Translation>
+    <Translation Language="pl-PL">1</Translation>
+  </Text>
+  
+  <Text Key="Plural2">
+    <Translation Language="en-US">true</Translation>
+
+    <Translation Language="ru-RU"><![CDATA[%10>=2 and %10<=4 and (%100<10 or %100>=20)]]></Translation>
+    <Translation Language="pl-PL"><![CDATA[%10>=2 and %10<=4 and (%100<10 or %100>=20)]]></Translation>
+  </Text>
+
+  <Text Key="Plural3">
+    <Translation Language="ru-RU"><![CDATA[true]]></Translation>
+    <Translation Language="pl-PL"><![CDATA[true]]></Translation>
+  </Text>   
+  
+</Localizations>

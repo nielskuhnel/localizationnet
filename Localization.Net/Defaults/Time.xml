@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Localizations>
+
+  <!-- Default templates for time based texts -->
+
+  <Text Key="Ago">
+    <Translation Language="en-US">
+        <![CDATA[#0{ < PT2S : right now | 
+      < PT10S: less than 10 seconds ago |
+      < PT1M: {#.TotalSeconds:N0} seconds ago |
+      < P1D: {#.TotalHours:N2} hours ago | 
+      a long time ago }
+      ]]></Translation>
+    <Translation Language="da-DK">
+      <![CDATA[#0{ < PT2S : lige nu | 
+      < PT10S: for mindre end 10 sekunder siden |
+      < PT1M: for {#.TotalSeconds:N0} sekunder siden |
+      < P1D: for {#.TotalHours:N2} timer siden | 
+      for længe siden}]]></Translation>
+  </Text>
+
+</Localizations>

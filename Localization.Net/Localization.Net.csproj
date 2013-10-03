@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C88BBDA6-6210-4B2B-9015-9F78B7C84FE1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Localization.Net</RootNamespace>
+    <AssemblyName>Localization.Net</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\LocalizationConfig.cs" />
+    <Compile Include="Configuration\LocalizationSourceAttribute.cs" />
+    <Compile Include="Configuration\LocalizationXmlSourceAttribute.cs" />
+    <Compile Include="DateTimeHelpers.cs" />
+    <Compile Include="DefaultTextManager.cs" />
+    <Compile Include="ExceptionHelper.cs" />
+    <Compile Include="Web\Mvc\LocalizationHtmlHelperExtensions.cs" />
+    <Compile Include="Exceptions\LocalizedArgumentException.cs" />
+    <Compile Include="Exceptions\LocalizedArgumentNullException.cs" />
+    <Compile Include="Exceptions\LocalizedArgumentOutOfRangeException.cs" />
+    <Compile Include="Exceptions\LocalizedFileNotFoundException.cs" />
+    <Compile Include="Exceptions\LocalizedInvalidOperationException.cs" />
+    <Compile Include="Exceptions\LocalizedKeyNotFoundException.cs" />
+    <Compile Include="Exceptions\LocalizedNotImplementedException.cs" />
+    <Compile Include="Exceptions\LocalizedNotSupportedException.cs" />
+    <Compile Include="Exceptions\LocalizedObjectDisposedException.cs" />
+    <Compile Include="LanguageInfo.cs" />
+    <Compile Include="Localization.cs" />
+    <Compile Include="LocalizedString.cs" />
+    <Compile Include="LocalizedStringConverter.cs" />
+    <Compile Include="LocalizedText.cs" />
+    <Compile Include="Maintenance\AssemblySourceLoader.cs" />
+    <Compile Include="Maintenance\BatchUpdatableTextSource.cs" />
+    <Compile Include="Maintenance\DupplicateTextProcessor.cs" />
+    <Compile Include="Maintenance\Extraction\CStyleLanguageTextExtractor.cs" />
+    <Compile Include="Maintenance\Extraction\SourceFileList.cs" />
+    <Compile Include="Maintenance\Extraction\TextExtractor.cs" />
+    <Compile Include="Maintenance\ITextSource.cs" />
+    <Compile Include="Maintenance\LanguageComparer.cs" />
+    <Compile Include="Maintenance\LocalizedTextState.cs" />
+    <Compile Include="Maintenance\SimpleTextSource.cs" />
+    <Compile Include="Maintenance\TextSourceAggregator.cs" />
+    <Compile Include="Maintenance\TextSourceMerger.cs" />
+    <Compile Include="Maintenance\XmlTextSource.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="ParameterSet.cs" />
+    <Compile Include="Parsing\DefaultExpressionParser.cs" />
+    <Compile Include="Parsing\ExpressionParser.cs" />
+    <Compile Include="Parsing\ExpressionParts.cs" />
+    <Compile Include="Parsing\HtmlPatternTransformer.cs" />
+    <Compile Include="Parsing\IPatternTransformer.cs" />
+    <Compile Include="Parsing\IPatternVisitor.cs" />
+    <Compile Include="Parsing\PatternPartPrinter.cs" />
+    <Compile Include="Parsing\StringTrimmer.cs" />
+    <Compile Include="Parsing\TextParser.cs" />
+    <Compile Include="Parsing\XmlExpressionParser.cs" />
+    <Compile Include="PatternExceptions.cs" />
+    <Compile Include="Processing\DefaultDialect.cs" />
+    <Compile Include="Processing\DelegateParameterEvaluatorFactory.cs" />
+    <Compile Include="Processing\DelegateSwitchConditionEvaluatorFactory.cs" />
+    <Compile Include="Processing\DelegateValueFormatterFactory.cs" />
+    <Compile Include="Processing\EvaluationContext.cs" />
+    <Compile Include="Processing\IFormatGroupExpander.cs" />
+    <Compile Include="Processing\IParameterEvaluator.cs" />
+    <Compile Include="Processing\IParameterEvaluatorFactory.cs" />
+    <Compile Include="Processing\IPatternProcessorFactory.cs" />
+    <Compile Include="Processing\ISwitchConditionEvaluator.cs" />
+    <Compile Include="Processing\ISwitchConditionEvaluatorFactory.cs" />
+    <Compile Include="Processing\IValueFormatter.cs" />
+    <Compile Include="Processing\IValueFormatterFactory.cs" />
+    <Compile Include="Processing\ParameterEvaluators\PatternLookupEvaluator.cs" />
+    <Compile Include="Processing\ParameterEvaluators\ReflectionParameterEvaluator.cs" />
+    <Compile Include="Processing\ParameterEvaluators\SimpleParameterEvaluator.cs" />
+    <Compile Include="Processing\ParameterValue.cs" />
+    <Compile Include="Processing\ParameterValues\DelegateFormatWrapper.cs" />
+    <Compile Include="Processing\ParameterValues\FormatWrapper.cs" />
+    <Compile Include="Processing\ParameterValues\UnencodedParameterValue.cs" />
+    <Compile Include="Processing\PatternDecorator.cs" />
+    <Compile Include="Processing\PatternDialect.cs" />
+    <Compile Include="Processing\PatternEvaluator.cs" />
+    <Compile Include="Processing\StringBasedSwitchConditionEvaluatorFactory.cs" />
+    <Compile Include="Processing\SwitchConditions\ArithmeticCondition.cs" />
+    <Compile Include="Processing\SwitchConditions\BooleanExpressionCondition.cs" />
+    <Compile Include="Processing\SwitchConditions\IntervalCondition.cs" />
+    <Compile Include="Processing\SwitchConditions\LookupCondition.cs" />
+    <Compile Include="Processing\SwitchConditions\TakeAllCondition.cs" />
+    <Compile Include="Processing\SwitchConditions\ValueListCondition.cs" />
+    <Compile Include="Processing\SwitchDecorator.cs" />
+    <Compile Include="Processing\TextDialect.cs" />
+    <Compile Include="Processing\ValueFormatters\DefaultFormatter.cs" />
+    <Compile Include="Processing\ValueFormatters\RomanToNumberConvertor.cs" />
+    <Compile Include="Processing\ValueFormatters\StringCaseFormatter.cs" />
+    <Compile Include="Processing\ValueFormatters\StringFormatFormatter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringHelpers.cs" />
+    <Compile Include="Support\Arithmetic.cs" />
+    <Compile Include="Support\ObjectHelper.cs" />
+    <Compile Include="TextManager.cs" />
+    <Compile Include="TypeFinder.cs" />
+    <Compile Include="Web\JavaScript\FormatGroupExpanders\HashTagFormatGroupExpanderGenerator.cs" />
+    <Compile Include="Web\JavaScript\IJavaScriptGenerator.cs" />
+    <Compile Include="Web\JavaScript\JavaScriptExpressionChecker.cs" />
+    <Compile Include="Web\JavaScript\JavaScriptExpressionWriter.cs" />
+    <Compile Include="Web\JavaScript\JavaScriptGenerator.cs" />
+    <Compile Include="Web\JavaScript\ParameterEvaluators\PatternLookupGenerator.cs" />
+    <Compile Include="Web\JavaScript\ParameterEvaluators\ReflectionParameterGenerator.cs" />
+    <Compile Include="Web\JavaScript\ParameterEvaluators\SimpleParameterGenerator.cs" />
+    <Compile Include="Web\JavaScript\PatternProcessorGenerator.cs" />
+    <Compile Include="Web\JavaScript\SwitchConditions\ArithmeticGenerator.cs" />
+    <Compile Include="Web\JavaScript\SwitchConditions\BooleanExpressionGenerator.cs" />
+    <Compile Include="Web\JavaScript\SwitchConditions\IntervalGenerator.cs" />
+    <Compile Include="Web\JavaScript\SwitchConditions\LookupGenerator.cs" />
+    <Compile Include="Web\JavaScript\SwitchConditions\TakeAllGenerator.cs" />
+    <Compile Include="Web\JavaScript\SwitchConditions\ValueListGenerator.cs" />
+    <Compile Include="Web\JavaScript\ValueFormatters\DefaultGenerator.cs" />
+    <Compile Include="Web\JavaScript\ValueFormatters\StringCaseGenerator.cs" />
+    <Compile Include="Web\JavaScript\ValueFormatters\StringFormatGenerator.cs" />
+    <Compile Include="Web\LocalizationWebConfig.cs" />
+    <Compile Include="Web\Mvc\Areas\LocalizationAreaRegistration.cs" />
+    <Compile Include="Web\Mvc\Controllers\ClientSideScriptController.cs" />
+    <Compile Include="Web\Mvc\ExceptionHelper.cs" />
+    <Compile Include="Web\Mvc\Exceptions.cs" />
+    <Compile Include="Web\Mvc\LocalizationHelper.cs" />
+    <Compile Include="Web\Mvc\LocalizedTextJavascriptResult.cs" />
+    <Compile Include="Web\Mvc\LocalizedValidationAttribute.cs" />
+    <Compile Include="Web\Mvc\LocalizingDataAnnotationsModelValidatorProvider.cs" />
+    <Compile Include="Web\Mvc\LocalizingDefaultModelBinder.cs" />
+    <Compile Include="Web\Mvc\LocalizingModelMetadataProvider.cs" />
+    <Compile Include="Web\Mvc\ResourceHelper.cs" />
+    <Compile Include="WriteLockDisposable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Defaults\Enumerations.xml" />
+    <EmbeddedResource Include="Defaults\Exceptions.xml" />
+    <EmbeddedResource Include="Defaults\PluralForms.xml" />
+    <EmbeddedResource Include="Defaults\Time.xml" />
+    <Content Include="Parsing\Default Parser Syntax.txt" />
+    <EmbeddedResource Include="Web\JavaScript\Resources\Localization.js" />
+    <EmbeddedResource Include="Web\JavaScript\Resources\MicrosoftAjaxCore.debug.js" />
+    <EmbeddedResource Include="Web\JavaScript\Resources\MicrosoftAjaxCore.js" />
+    <EmbeddedResource Include="Web\JavaScript\Resources\MicrosoftAjaxGlobalization.debug.js" />
+    <EmbeddedResource Include="Web\JavaScript\Resources\MicrosoftAjaxGlobalization.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

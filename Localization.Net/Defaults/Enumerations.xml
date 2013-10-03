@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Localizations>
+
+  <!-- Default templates for enumerations -->
+
+  <Text Key="Enum">
+    <Translation Language="en-US"><![CDATA[#0{ 0: {#} | ", {#}" | -1: " #1{ {#} |? and } {#}" }]]></Translation>
+    <Translation Language="da-DK"><![CDATA[#0{ 0: {#} | ", {#}" | -1: " #1{ {#} |? og } {#}" }]]></Translation>
+  </Text>
+
+</Localizations>

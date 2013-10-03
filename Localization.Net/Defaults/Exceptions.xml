@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Localizations>
+
+  <!-- The "any" language (*) is used to provide error messages for all languages -->
+
+  <Text Key="Exceptions.FileNotFoundException">
+    <Translation Language="*">The file {FileName} could not be opened</Translation>
+  </Text>
+
+  <Text Key="Exceptions.ResourceNotFoundException">
+    <Translation Language="*">The resource {FileName} could not be opened</Translation>
+  </Text>
+
+  <Text Key="TextManager.PatternException">
+    <Translation Language="*">Error while parsing {Key} for {Language} in namespace "{Namespace}". {Message}</Translation>
+  </Text>
+
+  <Text Key="FrameworkContext.CurrentLanguage.NullException">
+    <Translation Language="*">Current language cannot be null</Translation>
+  </Text>
+
+  <Text Key="DefaultExpressionParser.SyntaxError.ExpectedToken">
+    <Translation Language="*">Expected '{Token}'</Translation>
+  </Text>
+  <Text Key="DefaultExpressionParser.SyntaxError.UnexpectedToken">
+    <Translation Language="*">Unexpected token '{Token}'</Translation>
+  </Text>
+
+  <Text Key="DefaultExpressionParser.SyntaxError.UnexpectedSwitchToken">
+    <Translation Language="*">Unexpected token '{Token}'. Expected '\}' or '\|' in switch on {ParamterName}</Translation>
+  </Text>
+
+  <Text Key="PatternExceptions.SyntaxError">
+    <Translation Language="*">{Message} while parsing {Construct} at pos {Pos}</Translation>
+  </Text>
+  <Text Key="PatternExceptions.UnkownDialect">
+    <Translation Language="*">Unkown dialect "{Dialect}"</Translation>
+  </Text>
+
+
+  <Text Key="StringHelpers.TypeRefIsString">
+    <Translation Language="*">The type ref parameter cannot be string. Did you mean to specify a key?</Translation>    
+  </Text>
+
+  <Text Key="ObjectHelper.ParamsToParameterSet.DataCannotBeString">
+    <Translation Language="*">data is not supposed to be a string. Did you by accident specify a key?</Translation>
+  </Text>
+
+
+</Localizations>
