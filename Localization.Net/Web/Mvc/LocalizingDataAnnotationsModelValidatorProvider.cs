@@ -21,8 +21,10 @@ namespace Localization.Net.Web.Mvc
         public override IEnumerable<ModelValidationResult> Validate(object container)
         {
             try
-            {                
-                Attribute.Validate(Metadata.Model, "");
+            {
+				//Imclude the object in context for use in cross-field validation
+	            var validationContext = new ValidationContext(container);
+                Attribute.Validate(Metadata.Model, validationContext);
             }
             catch (ValidationException ex)
             {
